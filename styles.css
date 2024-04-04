@@ -1,10 +1,11 @@
 @font-face {
     font-family: 'Expo Arabic';
     src: url('ExpoArabic-Book.woff2') format('woff2'),
+        }
+@font-face {
     font-family: 'Muslimah';
-    src: url('Muslimah-Thin(1).woff2') format('woff2'),
+    src: url('Muslimah-Thin(1).woff2') format('woff2');
 }
-
 body {
         font-family: Expo Arabic, sans-serif;
         background-image: url('Science-Background.jpg');
