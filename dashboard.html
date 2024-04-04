@@ -7,16 +7,16 @@
     <style>
         /* Additional styles from the original file */
         body {
-    font-family: Arial, sans-serif;
-    background-image: url('Science-Background.jpg');
-    background-size: cover;
-    background-position: center center; /* Center horizontally and vertically */
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    height: 100vh; /* Fill the entire viewport height */
-}
+            font-family: Arial, sans-serif;
+            background-image: url('Science-Background.jpg');
+            background-size: cover;
+            background-position: center center; /* Center horizontally and vertically */
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh; /* Fill the entire viewport height */
+        }
 
         h1 {
             text-align: center;
@@ -51,23 +51,8 @@
     </style>
 </head>
 <body>
-    <h1>Leaderboard</h1>
-    <ol id="leaderboardList"></ol>
+    <div id="json-content"></div>
 
-    <script>
-        window.onload = function() {
-            fetch('dashboard.json')
-            .then(response => response.json())
-            .then(data => {
-                const leaderboardList = document.getElementById('leaderboardList');
-                data.forEach((entry, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<span>${index + 1}</span><span>${entry.nickname}</span><span>${entry.score}</span>`;
-                    leaderboardList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching leaderboard data:', error));
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
