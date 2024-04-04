@@ -1,3 +1,5 @@
+// scripts.js
+
 const questionElement = document.getElementById('question');
 const optionsElement = document.getElementById('options');
 const textInputElement = document.getElementById('textInput');
@@ -9,7 +11,6 @@ const loaderContainer = document.getElementById('loaderContainer');
 const loadingText = document.getElementById('loadingText');
 const nicknameInput = document.getElementById('nicknameInput');
 const submitNicknameButton = document.getElementById('submitNickname');
-const leaderboardList = document.getElementById('leaderboardList');
 
 const quizData = [
     {
@@ -22,24 +23,6 @@ const quizData = [
         question: "ما اسم المكون الذي يتميز باللون الأخضر المساهم في عملية التركيب الضوئي؟",
         type: "text-input",
         correctAnswer: "اليخضور"
-    },
-    {
-        question: "What is the capital of France?",
-        type: "multiple-choice",
-        answers: ["Paris", "Berlin", "London", "Rome"],
-        correctAnswer: "Paris"
-    },
-    {
-        question: "What is the capital of France?",
-        type: "multiple-choice",
-        answers: ["Paris", "Berlin", "London", "Rome"],
-        correctAnswer: "Paris"
-    },
-    {
-        question: "What is the capital of France?",
-        type: "multiple-choice",
-        answers: ["Paris", "Berlin", "London", "Rome"],
-        correctAnswer: "Paris"
     },
     // Add more questions here
 ];
