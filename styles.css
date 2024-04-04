@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Expo Arabic';
-    src: url('ExpoArabic-Book.ttf') format('ttf'),
+    src: url('ExpoArabic-Book.woff2') format('woff2'),
     font-family: 'Muslimah';
-    src: url('Muslimah-Thin(1).otf') format('otf'),
+    src: url('Muslimah-Thin(1).woff2') format('woff2'),
 }
 
 body {
