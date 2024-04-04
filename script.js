@@ -1,181 +1,188 @@
-    const questionElement = document.getElementById('question');
-    const optionsElement = document.getElementById('options');
-    const textInputElement = document.getElementById('textInput');
-    const submitButton = document.getElementById('submitButton');
-    const resultText = document.getElementById('result');
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const timerText = document.getElementById('timerText');
-    const loaderContainer = document.getElementById('loaderContainer');
-    const loadingText = document.getElementById('loadingText');
-    const nicknameInput = document.getElementById('nicknameInput');
-    const submitNicknameButton = document.getElementById('submitNickname');
-    const leaderboardList = document.getElementById('leaderboardList');
+// Define elements
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const textInputElement = document.getElementById("textInput");
+const submitButton = document.getElementById("submitButton");
+const resultText = document.getElementById("result");
+const scoreDisplay = document.getElementById("scoreDisplay");
+const timerText = document.getElementById("timerText");
+const loaderContainer = document.getElementById("loaderContainer");
+const loadingText = document.getElementById("loadingText");
+const nicknameInput = document.getElementById("nicknameInput");
+const submitNicknameButton = document.getElementById("submitNickname");
 
-    const quizData = [
-        {
-            question: "ما هو الاختلاف بين النسغ الخام و النسغ الجاهز؟",
-            type: "multiple-choice",
-            answers: ["النشأ", "كمية الماء", "كمية الأملاح", "لا فرق بينهما"],
-            correctAnswer: "النشأ"
-        },
-        {
-            question: "ما اسم المكون الذي يتميز باللون الأخضر المساهم في عملية التركيب الضوئي؟",
-            type: "text-input",
-            correctAnswer: "اليخضور"
-        },
-        {
-            question: "What is the capital of France?",
-            type: "multiple-choice",
-            answers: ["Paris", "Berlin", "London", "Rome"],
-            correctAnswer: "Paris"
-        },
-        {
-            question: "What is the capital of France?",
-            type: "multiple-choice",
-            answers: ["Paris", "Berlin", "London", "Rome"],
-            correctAnswer: "Paris"
-        },
-        {
-            question: "What is the capital of France?",
-            type: "multiple-choice",
-            answers: ["Paris", "Berlin", "London", "Rome"],
-            correctAnswer: "Paris"
-        },
-        // Add more questions here
-    ];
+// Quiz data
+const quizData = [
+  {
+    question: "ما هو الاختلاف بين النسغ الخام و النسغ الجاهز؟",
+    type: "multiple-choice",
+    answers: ["النشأ", "كمية الماء", "كمية الأملاح", "لا فرق بينهما"],
+    correctAnswer: "النشأ",
+  },
+];
 
-    let currentQuestionIndex = 0;
-    let timer;
-    let score = 0;
-    let remainingTime;
+// Variables
+let currentQuestionIndex = 0;
+let timer;
+let score = 0;
+let remainingTime;
 
-    function loadQuestion() {
-        clearInterval(timer);
-        timerText.textContent = '10';
-        scoreDisplay.textContent = score;
+// Function to load question
+function loadQuestion() {
+  clearInterval(timer);
+  timerText.textContent = "15";
+  scoreDisplay.textContent = score;
 
-        const currentQuestion = quizData[currentQuestionIndex];
-        questionElement.textContent = currentQuestion.question;
-        optionsElement.innerHTML = "";
-        textInputElement.value = "";
-        textInputElement.style.display = "none";
-        submitButton.style.display = "none";
-        resultText.textContent = "";
+  const currentQuestion = quizData[currentQuestionIndex];
+  questionElement.textContent = currentQuestion.question;
+  optionsElement.innerHTML = "";
+  textInputElement.value = "";
+  textInputElement.style.display = "none";
+  submitButton.style.display = "none";
+  resultText.textContent = "";
 
-        if (currentQuestion.type === "multiple-choice") {
-            currentQuestion.answers.forEach(answer => {
-                const optionButton = document.createElement('button');
-                optionButton.classList.add('option');
-                optionButton.textContent = answer;
-                optionButton.addEventListener('click', () => {
-                    checkAnswer(answer);
-                });
-                optionsElement.appendChild(optionButton);
-            });
-        } else if (currentQuestion.type === "text-input") {
-            textInputElement.style.display = "block";
-            submitButton.style.display = "block";
-        }
-
-        startTimer();
-    }
-
-    function startTimer() {
-        let startTime = Date.now();
-        remainingTime = 10;
-        timer = setInterval(() => {
-            let elapsedTime = (Date.now() - startTime) / 1000;
-            remainingTime = 10 - elapsedTime;
-            if (remainingTime <= 0) {
-                clearInterval(timer);
-                showResult('انتهى الوقت', false);
-                currentQuestionIndex++;
-                if (currentQuestionIndex < quizData.length) {
-                    setTimeout(loadQuestion, 2000);
-                } else {
-                    setTimeout(showTotalScore, 2000);
-                }
-            } else {
-                timerText.textContent = remainingTime.toFixed(1);
-            }
-        }, 100);
-    }
-
-    function checkAnswer(answer) {
-        clearInterval(timer);
-        loaderContainer.style.display = 'flex';
-        loadingText.textContent = '\n';
-        const currentQuestion = quizData[currentQuestionIndex];
-        const correctAnswer = currentQuestion.correctAnswer; // Define correctAnswer here
-        setTimeout(() => {
-            if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-                score += Math.round(remainingTime * 100);
-                scoreDisplay.textContent = score;
-                showResult('الجواب صحيح', true);
-            } else {
-                showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
-            }
-        }, 2000);
-    }   
-
-    function showResult(message, isCorrect) {
-        loaderContainer.style.display = 'none';
-        resultText.textContent = message;
-        resultText.classList.remove('correct-answer');
-        if (isCorrect) {
-            resultText.classList.add('correct-answer');
-        } else {
-            resultText.classList.remove('correct-answer');
-        }
-        setTimeout(() => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                loadQuestion();
-            } else {
-                showTotalScore();
-            }
-        }, 2000);
-    }
-
-    function showTotalScore() {
-        leaderboardList.innerHTML = ''; // Clear previous leaderboard
-        const sortedScores = [...localStorage]
-            .map(([nickname, score]) => ({ nickname, score: parseInt(score) }))
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 3);
-
-        sortedScores.forEach((entry, index) => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `<span>${index + 1}</span><span>${entry.nickname}</span><span>${entry.score}</span>`;
-            leaderboardList.appendChild(listItem);
-        });
-
-        document.getElementById('leaderboard').style.display = 'block';
-    }
-
-    submitButton.addEventListener('click', () => {
-        clearInterval(timer);
-        const userInput = textInputElement.value;
-        checkAnswer(userInput);
+  if (currentQuestion.type === "multiple-choice") {
+    currentQuestion.answers.forEach((answer) => {
+      const optionButton = document.createElement("button");
+      optionButton.classList.add("option");
+      optionButton.textContent = answer;
+      optionButton.addEventListener("click", () => {
+        checkAnswer(answer);
+      });
+      optionsElement.appendChild(optionButton);
     });
+  } else if (currentQuestion.type === "text-input") {
+    textInputElement.style.display = "block";
+    submitButton.style.display = "block";
+  }
 
-    submitNicknameButton.addEventListener('click', () => {
-        startGame();
-    });
+  startTimer();
+}
 
-    function startGame() {
-        const nickname = nicknameInput.value.trim();
-        if (nickname !== '') {
-            nicknameInput.style.display = 'none';
-            submitNicknameButton.style.display = 'none';
-            loadQuestion();
-        } else {
-            alert('Please enter your nickname to start the game.');
-        }
+// Function to start timer
+function startTimer() {
+  let startTime = Date.now();
+  remainingTime = 15;
+  timer = setInterval(() => {
+    let elapsedTime = (Date.now() - startTime) / 1000;
+    remainingTime = 15 - elapsedTime;
+    if (remainingTime <= 0) {
+      clearInterval(timer);
+      showResult("انتهى الوقت", false);
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizData.length) {
+        setTimeout(loadQuestion, 2000);
+      } else {
+        saveScoreAndRedirect();
+      }
+    } else {
+      timerText.textContent = remainingTime.toFixed(1);
     }
+  }, 100);
+}
 
-    window.onload = () => {
-        nicknameInput.style.display = 'block';
-        submitNicknameButton.style.display = 'block';
-        localStorage.clear();
-    };
+// Function to check answer
+function checkAnswer(answer) {
+  clearInterval(timer);
+  loaderContainer.style.display = "flex";
+  loadingText.textContent = "\n";
+  const currentQuestion = quizData[currentQuestionIndex];
+  const correctAnswer = currentQuestion.correctAnswer; // Define correctAnswer here
+  setTimeout(() => {
+    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+      score += Math.round(remainingTime * 100);
+      scoreDisplay.textContent = score;
+      showResult("الجواب صحيح", true);
+    } else {
+      showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+    }
+  }, 3000);
+}
+
+// Function to show result
+function showResult(message, isCorrect) {
+  loaderContainer.style.display = "none";
+  resultText.textContent = message;
+  resultText.classList.remove("correct-answer");
+  if (isCorrect) {
+    resultText.classList.add("correct-answer");
+  } else {
+    resultText.classList.remove("correct-answer");
+  }
+  setTimeout(() => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.length) {
+      loadQuestion();
+    } else {
+      saveScoreAndRedirect();
+    }
+  }, 2000);
+}
+
+// Function to save score and redirect to dashboard
+function saveScoreAndRedirect() {
+  // Get nickname from local storage
+  const nickname = localStorage.getItem("nickname");
+  if (!nickname) {
+    alert("Nickname not found. Please provide a nickname.");
+    return;
+  }
+
+  // Create data object with nickname and score
+  const data = {
+    nickname: nickname,
+    score: score,
+  };
+
+  // Send data to server-side script to save to JSON file
+  fetch("/save-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Redirect to dashboard.html on successful save
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      console.error("Error saving score:", error);
+      // Handle error
+    });
+}
+
+// Event listener for submit button
+submitButton.addEventListener("click", () => {
+  clearInterval(timer);
+  const userInput = textInputElement.value;
+  checkAnswer(userInput);
+});
+
+// Event listener for submit nickname button
+submitNicknameButton.addEventListener("click", () => {
+  startGame();
+});
+
+// Function to start the game
+function startGame() {
+  const nickname = nicknameInput.value.trim();
+  if (nickname !== "") {
+    nicknameInput.style.display = "none";
+    submitNicknameButton.style.display = "none";
+    localStorage.setItem("nickname", nickname); // Save nickname to local storage
+    loadQuestion();
+  } else {
+    alert("Please enter your nickname to start the game.");
+  }
+}
+
+// On page load
+window.onload = () => {
+  nicknameInput.style.display = "block";
+  submitNicknameButton.style.display = "block";
+  localStorage.clear(); // Clear local storage
+};
