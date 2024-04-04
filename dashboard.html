@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        /* Additional styles from the original file */
+        body {
+    font-family: Arial, sans-serif;
+    background-image: url('Science-Background.jpg');
+    background-size: cover;
+    background-position: center center; /* Center horizontally and vertically */
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    height: 100vh; /* Fill the entire viewport height */
+}
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        li:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        li:nth-child(even) {
+            background-color: #e9e9e9;
+        }
+
+        span {
+            flex: 1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leaderboard</h1>
+    <ol id="leaderboardList"></ol>
+
+    <script>
+        window.onload = function() {
+            fetch('dashboard.json')
+            .then(response => response.json())
+            .then(data => {
+                const leaderboardList = document.getElementById('leaderboardList');
+                data.forEach((entry, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<span>${index + 1}</span><span>${entry.nickname}</span><span>${entry.score}</span>`;
+                    leaderboardList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+        }
+    </script>
+</body>
+</html>

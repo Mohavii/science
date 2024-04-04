@@ -1,0 +1,267 @@
+    body {
+        font-family: Expo Arabic, sans-serif;
+        background-image: url('Science-Background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        color: #333;
+
+        height: 100vh; /* Set the body height to fill the viewport */
+
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    #timer, #score {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    #timerText, #scoreDisplay {
+        font-weight: bold;
+        color: #333;
+    }
+
+    #question {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    #options {
+        text-align: center;
+    }
+
+    .option {
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: #5e239d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .option:hover {
+        background-color: #4b1a7a;
+    }
+
+    #textInput {
+        width: calc(100% - 40px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #5e239d;
+        border-radius: 5px;
+        color: #5e239d;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        display: none;
+    }
+
+    #textInput:focus {
+        border-color: #4b1a7a;
+    }
+
+    button {
+        display: none;
+        font-family: 'Muslimah', sans-serif;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #5e239d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #4b1a7a;
+    }
+
+    #result {
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 20px;
+        color: #5e239d;
+    }
+
+    .correct-answer {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        animation: correctAnimation 1s ease-in-out;
+    }
+
+    @keyframes correctAnimation {
+        0% {
+            transform: scale(0.9);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 8px solid #3498db;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+        margin-top: 20px;
+    }
+
+    .timer-container {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 20px auto;
+    }
+    #nicknameInput {
+        width: 95%;
+        font-family: 'Muslimah', sans-serif;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+    
+    #nicknameInput:focus {
+        border-color: #5e239d;
+        outline: none;
+    }
+    
+    .timer-circle {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 80px;
+        height: 80px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    .timer-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        font-weight: bold;
+        color: #5e239d;
+        line-height: 80px; /* Equal to the height of the circle */
+    }
+
+    @media only screen and (max-width: 599px) {
+        body {
+            font-size: 16px; /* Adjust font size for better readability on mobile */
+        }
+    
+        .container {
+            width: 90%; /* Adjusted width for better responsiveness */
+            margin: 20px auto; /* Reduce margin for smaller screens */
+        }
+    
+        h1 {
+            font-size: 24px; /* Decrease heading font size for mobile */
+        }
+    
+        #question {
+            font-size: 20px; /* Decrease question font size for mobile */
+        }
+    
+        .option {
+            padding: 8px 16px; /* Adjust option button padding for mobile */
+            font-size: 14px; /* Decrease option button font size for mobile */
+        }
+    
+        #textInput {
+            font-size: 14px; /* Decrease input font size for mobile */
+        }
+    
+        button {
+            font-size: 16px; /* Adjust button font size for mobile */
+        }
+    
+        #result {
+            font-size: 16px; /* Adjust result font size for mobile */
+        }
+    
+        .timer-container {
+            margin: 10px auto; /* Reduce timer container margin for mobile */
+        }
+    
+        #nicknameInput {
+            font-size: 14px; /* Decrease input font size for mobile */
+        }
+    
+        .timer-circle {
+            width: 60px; /* Decrease timer circle size for mobile */
+            height: 60px;
+            border-width: 12px; /* Adjust border width for smaller circle */
+        }
+    
+        .timer-text {
+            font-size: 18px; /* Adjust timer text font size for mobile */
+        }
+    }
