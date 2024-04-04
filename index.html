@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body{
+       font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #timer, #score {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        #timerText, #scoreDisplay {
+            font-weight: bold;
+            color: #333;
+        }
+
+        #question {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #options {
+            text-align: center;
+        }
+
+        .option {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #5e239d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #4b1a7a;
+        }
+
+        #textInput {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #5e239d;
+            border-radius: 5px;
+            color: #5e239d;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            display: none;
+        }
+
+        #textInput:focus {
+            border-color: #4b1a7a;
+        }
+
+        button {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #5e239d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4b1a7a;
+        }
+
+        #result {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #5e239d;
+        }
+
+        .correct-answer {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            animation: correctAnimation 1s ease-in-out;
+        }
+
+        @keyframes correctAnimation {
+            0% {
+                transform: scale(0.9);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .timer-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+        }
+
+        .timer-circle {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 80px;
+            height: 80px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #5e239d;
+            line-height: 80px; /* Equal to the height of the circle */
+        }
+
+        /* Hide elements based on screen size */
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none;
+            }
+
+            .mobile-only {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .desktop-only {
+                display: block;
+            }
+
+            .mobile-only {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Start button shown for desktop -->
+        <button id="startButton" class="desktop-only">Start Game</button>
+
+        <h1>Quiz Game</h1>
+        <div class="timer-container">
+            <div class="timer-circle"></div>
+            <div id="timerText" class="timer-text">10</div>
+        </div>
+        <div id="score">Score: <span id="scoreDisplay">0</span></div>
+        <p id="question"></p>
+        <div id="options"></div>
+        <!-- Nickname input shown for mobile -->
+        <input type="text" id="nicknameInput" placeholder="Enter your nickname" class="mobile-only">
+        <!-- Buttons to answer shown for mobile -->
+        <div id="mobileOptions" class="mobile-only"></div>
+        <!-- Input answer hidden for desktop -->
+        <input type="text" id="textInput" placeholder="Type your answer" class="desktop-only">
+        <!-- Submit button hidden for desktop -->
+        <button id="submitButton" class="desktop-only">Submit</button>
+        <p id="result"></p>
+    </div>
+
+    <div class="loader-container" id="loaderContainer">
+        <div class="loader"></div>
+        <div class="loading-text" id="loadingText"></div>
+    </div>
+
+
+    <script>
+    // Define variables for elements
+    const startButton = document.getElementById('startButton');
+    const nicknameInput = document.getElementById('nicknameInput');
+    const questionElement = document.getElementById('question');
+    const optionsElement = document.getElementById('options');
+    const mobileOptionsElement = document.getElementById('mobileOptions');
+    const textInputElement = document.getElementById('textInput');
+    const submitButton = document.getElementById('submitButton');
+    const resultText = document.getElementById('result');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const timerText = document.getElementById('timerText');
+    const loaderContainer = document.getElementById('loaderContainer');
+    const loadingText = document.getElementById('loadingText');
+
+    // Quiz data
+    const quizData = [
+        {
+            question: "What is the capital of France?",
+            type: "multiple-choice",
+            answers: ["Paris", "Berlin", "London", "Rome"],
+            correctAnswer: "Paris"
+        },
+        {
+            question: "What is 2 + 2?",
+            type: "text-input",
+            correctAnswer: "4"
+        }
+        // Add more questions here
+    ];
+
+    let currentQuestionIndex = 0;
+    let timer;
+    let score = 0;
+    let remainingTime;
+
+    // Function to load a question
+    function loadQuestion() {
+        clearInterval(timer);
+        timerText.textContent = '10';
+        scoreDisplay.textContent = score;
+
+        const currentQuestion = quizData[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+        optionsElement.innerHTML = "";
+        mobileOptionsElement.innerHTML = "";
+        textInputElement.value = "";
+        textInputElement.style.display = "none";
+        submitButton.style.display = "none";
+        resultText.textContent = "";
+
+        if (currentQuestion.type === "multiple-choice") {
+            currentQuestion.answers.forEach(answer => {
+                const optionButton = document.createElement('button');
+                optionButton.classList.add('option');
+                optionButton.textContent = answer;
+                optionButton.addEventListener('click', () => {
+                    checkAnswer(answer);
+                });
+                optionsElement.appendChild(optionButton);
+
+                // For mobile, create buttons to answer
+                const mobileOptionButton = document.createElement('button');
+                mobileOptionButton.classList.add('option');
+                mobileOptionButton.textContent = answer;
+                mobileOptionButton.addEventListener('click', () => {
+                    checkAnswer(answer);
+                });
+                mobileOptionsElement.appendChild(mobileOptionButton);
+            });
+        } else if (currentQuestion.type === "text-input") {
+            textInputElement.style.display = "block";
+            submitButton.style.display = "block";
+        }
+
+        startTimer();
+    }
+
+    // Function to start the timer
+    function startTimer() {
+        let startTime = Date.now();
+        remainingTime = 10;
+        timer = setInterval(() => {
+            let elapsedTime = (Date.now() - startTime) / 1000;
+            remainingTime = 10 - elapsedTime;
+            if (remainingTime <= 0) {
+                clearInterval(timer);
+                showResult('Time\'s up!', false);
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    setTimeout(loadQuestion, 2000);
+                } else {
+                    setTimeout(showTotalScore, 2000);
+                }
+            } else {
+                timerText.textContent = remainingTime.toFixed(1);
+            }
+        }, 100);
+    }
+
+    // Function to check the answer
+    function checkAnswer(answer) {
+        clearInterval(timer);
+        loaderContainer.style.display = 'flex';
+        loadingText.textContent = 'Checking answer...';
+        const currentQuestion = quizData[currentQuestionIndex];
+        setTimeout(() => {
+            if (answer.toLowerCase() === currentQuestion.correctAnswer.toLowerCase()) {
+                score += Math.round(remainingTime * 1000);
+                scoreDisplay.textContent = score;
+                showResult('Correct!', true);
+            } else {
+                showResult('Incorrect. Try again.', false);
+            }
+        }, 2000);
+    }
+
+    // Function to show result
+    function showResult(message, isCorrect) {
+        loaderContainer.style.display = 'none';
+        resultText.textContent = message;
+        resultText.classList.remove('correct-answer');
+        if (isCorrect) {
+            resultText.classList.add('correct-answer');
+        } else {
+            resultText.classList.remove('correct-answer');
+        }
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showTotalScore();
+            }
+        }, 2000);
+    }
+
+    // Function to show total score
+    function showTotalScore() {
+        resultText.textContent = `Total Score: ${score}`;
+        questionElement.textContent = '';
+        optionsElement.innerHTML = '';
+        mobileOptionsElement.innerHTML = '';
+        textInputElement.style.display = 'none';
+        submitButton.style.display = 'none';
+    }
+
+    // Function to start the game
+    function startGame() {
+        // Hide start button
+        startButton.style.display = 'none';
+
+        // Show countdown for mobile devices
+        let countdown = 5; // 5-second countdown
+        const countdownInterval = setInterval(() => {
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                // Start the game after the countdown
+                loadQuestion();
+            } else {
+                // Display the countdown
+                loadingText.textContent = `Starting in ${countdown} seconds...`;
+                countdown--;
+            }
+        }, 1000);
+    }
+
+    // Event listener for start button
+    startButton.addEventListener('click', startGame);
+
+    </script>
+</body>
+</html>
