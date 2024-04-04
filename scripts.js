@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Fetch JSON data from file
-    fetch('dashboard.json')
-        .then(response => response.json())
-        .then(jsonData => {
+fetch('https://cbf67d83-7188-446b-9668-ff15d1924ba4-00-19ngter69pbcw.janeway.replit.dev//dashboard.json')
+.then(response => response.json())
+.then(data => {
+  // Process data and display it on your website
+  console.log(data);
+})
+.catch(error => console.error('Error:', error));
             // Generate leaderboard HTML
             var leaderboardHTML = "<ol>";
             jsonData.forEach(player => {
