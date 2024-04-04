@@ -19,4 +19,3 @@ fetch('https://cbf67d83-7188-446b-9668-ff15d1924ba4-00-19ngter69pbcw.janeway.rep
             jsonElement.innerHTML = leaderboardHTML;
         })
         .catch(error => console.error('Error fetching JSON:', error));
-});
