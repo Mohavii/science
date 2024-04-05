@@ -5,25 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <style>
-        /* Additional styles from the original file */
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('Science-Background.jpg');
-            background-size: cover;
-            background-position: center center; /* Center horizontally and vertically */
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            height: 100vh; /* Fill the entire viewport height */
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-            color: #333;
-        }
-
+        /* CSS styles for the table */
         table {
             width: 50%;
             margin: 20px auto;
@@ -32,42 +14,22 @@
             background-color: #fff;
         }
 
-        thead {
-            background-color: #f9f9f9;
-        }
-
         th, td {
             padding: 10px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
         th {
-            background-color: #333;
-            color: #fff;
-        }
-
-        tr:nth-child(odd) {
             background-color: #f9f9f9;
-        }
-
-        tr:nth-child(even) {
-            background-color: #e9e9e9;
         }
     </style>
 </head>
 <body>
     <h1>Leaderboard</h1>
-    <table id="leaderboard">
-        <thead>
-            <tr>
-                <th>Nickname</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody id="leaderboard-body">
-            <!-- Leaderboard data will be populated here -->
-        </tbody>
-    </table>
+    <div id="json-content">
+        <!-- Leaderboard table will be populated here -->
+    </div>
 
     <script src="scripts.js"></script>
 </body>
