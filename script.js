@@ -260,3 +260,6 @@ window.onload = () => {
   submitNicknameButton.style.display = "block";
   localStorage.clear(); // Clear local storage
 };
+function switchToPage(pageURL) {
+  window.location.href = pageURL;
+}
