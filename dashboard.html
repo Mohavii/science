@@ -5,20 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <style>
-                body {
-            font-family: Arial, sans-serif;
+        /* Import custom fonts */
+        @font-face {
+            font-family: Expo Arabic;
+            src: url('ExpoArabic-Book.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: Muslimah;
+            src: url('Muslimah-Thin (1).woff2') format('woff2');
+        }
+
+        /* Global styles */
+        body {
+            font-family: Expo Arabic, sans-serif; /* Use Expo Arabic as primary font */
             background-image: url('Science-Background.jpg');
             background-size: cover;
-            background-position: center center; /* Center horizontally and vertically */
+            background-position: center center;
             background-repeat: no-repeat;
             margin: 0;
             padding: 0;
             color: #333;
-            height: 100vh; /* Fill the entire viewport height */
+            height: 100vh;
+            text-align: center; /* Center align all text */
         }
-        /* CSS styles for the table */
+
+        /* Table styles */
         table {
-            width: 50%;
+            font-family: Muslimah, sans-serif; /* Use Muslimah for table font */
+            width: 80%; /* Expand table width for better readability */
             margin: 20px auto;
             border-collapse: collapse;
             border: 1px solid #ddd;
@@ -26,18 +40,27 @@
         }
 
         th, td {
-            padding: 10px;
-            text-align: left;
+            padding: 12px; /* Increase cell padding for better spacing */
+            text-align: center; /* Center align table content */
             border-bottom: 1px solid #ddd;
         }
 
         th {
             background-color: #f9f9f9;
+            font-weight: bold; /* Make header cells bold for emphasis */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
 <body>
-    <h1>Leaderboard</h1>
+    <h1>قائمة أفضل اللاعبين</h1> <!-- Leaderboard title in Arabic -->
     <div id="json-content">
         <!-- Leaderboard table will be populated here -->
     </div>
