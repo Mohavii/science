@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Fetch JSON data from server
-    fetch('https://cbf67d83-7188-446b-9668-ff15d1924ba4-00-19ngter69pbcw.janeway.replit.dev/get-scores')
+    fetch('https://pacific-aboard-stock.glitch.me/get-scores')
     .then(response => response.json())
     .then(jsonData => {
         // Sort the data by score (descending order)
