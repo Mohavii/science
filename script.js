@@ -135,7 +135,7 @@ function saveScoreAndRedirect() {
   };
 
   // Send data to server-side script to save to JSON file
-  fetch("https://cbf67d83-7188-446b-9668-ff15d1924ba4-00-19ngter69pbcw.janeway.replit.dev/save-score", {
+  fetch("https://pacific-aboard-stock.glitch.me/save-score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
