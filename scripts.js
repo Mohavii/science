@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
         jsonData.sort((a, b) => b.score - a.score);
 
         // Generate HTML for the table
-        var tableHTML = "<thead><tr><th>اللاعب</th><th>عدد نقاطه</th></tr></thead><tbody>";
+        var tableHTML = "<thead><tr><th>عدد نقاطه</th><th>اللاعب</th></tr></thead><tbody>";
         jsonData.forEach(player => {
-            tableHTML += `<tr><td>${player.nickname}</td><td>${player.score}</td></tr>`;
+            tableHTML += `<tr><td>${player.score}</td><td>${player.nickname}</td></tr>`;
         });
         tableHTML += "</tbody>";
 
