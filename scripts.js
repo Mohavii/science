@@ -6,20 +6,28 @@ document.addEventListener("DOMContentLoaded", function() {
         // Sort the data by score (descending order)
         jsonData.sort((a, b) => b.score - a.score);
 
-        // Generate leaderboard HTML
-        var leaderboardHTML = "<ol>";
+        // Generate HTML for the table
+        var tableHTML = "<thead><tr><th>Nickname</th><th>Score</th></tr></thead><tbody>";
         jsonData.forEach(player => {
-            leaderboardHTML += `<li><span>${player.nickname}</span><span>${player.score}</span></li>`;
+            tableHTML += `<tr><td>${player.nickname}</td><td>${player.score}</td></tr>`;
         });
-        leaderboardHTML += "</ol>";
+        tableHTML += "</tbody>";
 
-        // Display leaderboard HTML
+        // Create a table element and set its inner HTML
+        var tableElement = document.createElement("table");
+        tableElement.innerHTML = tableHTML;
+
+        // Add some basic styling
+        tableElement.style.width = "50%";
+        tableElement.style.margin = "20px auto";
+        tableElement.style.borderCollapse = "collapse";
+        tableElement.style.border = "1px solid #ddd";
+        tableElement.style.backgroundColor = "#fff";
+        tableElement.style.textAlign = "left";
+
+        // Add the table to the DOM
         var jsonElement = document.getElementById("json-content");
-        if (jsonElement) {
-            jsonElement.innerHTML = leaderboardHTML;
-        } else {
-            console.error('Error: Element with id "json-content" not found.');
-        }
+        jsonElement.appendChild(tableElement);
     })
     .catch(error => console.error('Error fetching JSON:', error));
 });
