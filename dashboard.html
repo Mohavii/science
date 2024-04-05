@@ -24,9 +24,23 @@
             background-repeat: no-repeat;
             margin: 0;
             padding: 0;
-            color: #fff;
+            color: #333;
             height: 100vh;
             text-align: center; /* Center align all text */
+        }
+                .title-container {
+            background-color: rgba(128, 128, 128, 0.5); /* Semi-transparent gray background color */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px; /* Add some padding for spacing */
+            margin: 20px auto; /* Center the box */
+            width: fit-content; /* Adjust width to fit content */
+            max-width: 80%; /* Limit maximum width */
+        }
+
+        h1 {
+            margin: 0; /* Remove default margin */
+            font-family: Expo Arabic, sans-serif; /* Use Muslimah font for the title */
+            color: #fff
         }
 
         /* Table styles */
@@ -62,7 +76,9 @@
     </style>
 </head>
 <body>
-    <h1>قائمة أفضل اللاعبين</h1> <!-- Leaderboard title in Arabic -->
+     <div class="title-container">
+        <h1>قائمة أفضل اللاعبين</h1> <!-- Leaderboard title in Arabic -->
+    </div>
     <div id="json-content">
         <!-- Leaderboard table will be populated here -->
     </div>
