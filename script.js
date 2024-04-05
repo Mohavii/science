@@ -19,6 +19,61 @@ const quizData = [
     answers: ["النشأ", "كمية الماء", "كمية الأملاح", "لا فرق بينهما"],
     correctAnswer: "النشأ",
   },
+  {
+  question: "ما اسم المكون الذي يتميز باللون الأخضر المساهم في عملية التركيب الضوئي؟",
+  type: "text-input",
+  correctAnswer: "اليخضور"
+},
+{
+  question: "أتمم الفراغ بما يناسب : ماء + أملاح معدنية + ............. + يخضور + ضوء = أكسجين + نشأ",
+  type: "text-input",
+  correctAnswer: "ثاني اكسيد الكربون"
+},
+{
+  question: "ينقل الأنبوب الطلعي",
+  type: "multiple-choice",
+  answers: ["الماء", "الأمشاش الأنثوية", "حبات الطلع", "الأمشاش الذكرية"],
+  correctAnswer: "الأمشاش الذكرية"
+},
+{
+  question: "أتمم الفراغ بما يناسب : الانتاش هو تحول البذرة من حالة ....... الى حالة نشاط بتوفر الظروف الملائمة",
+  type: "text-input",
+  correctAnswer: "سبات"
+},
+{
+  question: "اختر الدخيل من هذه المجموعة",
+  type: "multiple-choice",
+  answers: ["الإفتسال", "الترقيد", "الساق البصلية", "التطعيم"],
+  correctAnswer: "الساق البصلية"
+},
+{
+  question: "اختر الدخيل من هذه المجموعة",
+  type: "multiple-choice",
+  answers: ["الرّي", "الإضاءة", "الحرث", "الأدوية"],
+  correctAnswer: "الإضاءة"
+},
+{
+  question: "النمو عند النبات الأخضر هو نمو :",
+  type: "multiple-choice",
+  answers: ["يتم بواسطة البراعم القمية فقط", "يتم بواسطة الساق", "متقطع", "متواصل"],
+  correctAnswer: "متواصل"
+},
+{
+  question: "ماهي نتيجة صنع المادة العضوية بالتركيب الضوئي؟",
+  type: "text-input",
+  correctAnswer: "زيادة في الكتلة"
+},
+{
+  question: "يتوقف النمو عند النباتات الحولية في فترة من فترات حياتها",
+  type: "true-false",
+  correctAnswer: "true"
+},
+{
+  question: "البرعم القمي هو العضو المسؤول عن الزيادة في العرض",
+  type: "true-false",
+  correctAnswer: "false"
+},
+
 ];
 
 // Variables
@@ -109,7 +164,7 @@ function checkAnswer(answer) {
   const correctAnswer = currentQuestion.correctAnswer; // Define correctAnswer here
   setTimeout(() => {
     if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-      score += Math.round(remainingTime * 100);
+      score += Math.round(remainingTime * 66);
       scoreDisplay.textContent = score;
       showResult("الجواب صحيح", true);
     } else {
