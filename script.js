@@ -40,6 +40,25 @@ function loadQuestion() {
   textInputElement.style.display = "none";
   submitButton.style.display = "none";
   resultText.textContent = "";
+  
+  if (currentQuestion.type === "true-false") {
+  const trueButton = document.createElement("button");
+  trueButton.classList.add("option");
+  trueButton.textContent = "صواب"; // Change text for true button
+  trueButton.addEventListener("click", () => {
+    checkAnswer(true); // Pass true as the answer for true button
+  });
+  optionsElement.appendChild(trueButton);
+
+  const falseButton = document.createElement("button");
+  falseButton.classList.add("option");
+  falseButton.textContent = "خطأ"; // Change text for false button
+  falseButton.addEventListener("click", () => {
+    checkAnswer(false); // Pass false as the answer for false button
+  });
+  optionsElement.appendChild(falseButton);
+}
+
 
   if (currentQuestion.type === "multiple-choice") {
     currentQuestion.answers.forEach((answer) => {
