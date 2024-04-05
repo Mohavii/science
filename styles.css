@@ -1,4 +1,8 @@
-    body {
+@font-face {
+    font-family: Expo Arabic; /* Name of the font family */
+    src: url('ExpoArabic-Book.woff2') format('woff2'); /* Source of the font file */
+}
+body {
         font-family: Expo Arabic, sans-serif;
         background-image: url('Science-Background.jpg');
         background-size: cover;
