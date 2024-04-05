@@ -2,6 +2,10 @@
     font-family: Expo Arabic; /* Name of the font family */
     src: url('ExpoArabic-Book.woff2') format('woff2'); /* Source of the font file */
 }
+@font-face {
+    font-family: Muslimah; /* Name of the font family */
+    src: url('Muslimah-Thin (1).woff2') format('woff2'); /* Source of the font file */
+}
 body {
         font-family: Expo Arabic, sans-serif;
         background-image: url('Science-Background.jpg');
