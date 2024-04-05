@@ -7,14 +7,19 @@ document.addEventListener("DOMContentLoaded", function() {
         jsonData.sort((a, b) => b.score - a.score);
 
         // Generate leaderboard HTML
-        var leaderboardHTML = "";
+        var leaderboardHTML = "<ol>";
         jsonData.forEach(player => {
-            leaderboardHTML += `<tr><td>${player.nickname}</td><td>${player.score}</td></tr>`;
+            leaderboardHTML += `<li><span>${player.nickname}</span><span>${player.score}</span></li>`;
         });
+        leaderboardHTML += "</ol>";
 
         // Display leaderboard HTML
-        var leaderboardBody = document.getElementById("leaderboard-body");
-        leaderboardBody.innerHTML = leaderboardHTML;
+        var jsonElement = document.getElementById("json-content");
+        if (jsonElement) {
+            jsonElement.innerHTML = leaderboardHTML;
+        } else {
+            console.error('Error: Element with id "json-content" not found.');
+        }
     })
     .catch(error => console.error('Error fetching JSON:', error));
 });
