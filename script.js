@@ -20,59 +20,59 @@ const quizData = [
     correctAnswer: "النشأ",
   },
   {
-  question: "ما اسم المكون الذي يتميز باللون الأخضر المساهم في عملية التركيب الضوئي؟",
-  type: "text-input",
-  correctAnswer: "اليخضور"
-},
-{
-  question: "أتمم الفراغ بما يناسب : ماء + أملاح معدنية + ............. + يخضور + ضوء = أكسجين + نشأ",
-  type: "text-input",
-  correctAnswer: "ثاني اكسيد الكربون"
-},
-{
-  question: "ينقل الأنبوب الطلعي",
-  type: "multiple-choice",
-  answers: ["الماء", "الأمشاش الأنثوية", "حبات الطلع", "الأمشاش الذكرية"],
-  correctAnswer: "الأمشاش الذكرية"
-},
-{
-  question: "أتمم الفراغ بما يناسب : الانتاش هو تحول البذرة من حالة ....... الى حالة نشاط بتوفر الظروف الملائمة",
-  type: "text-input",
-  correctAnswer: "سبات"
-},
-{
-  question: "اختر الدخيل من هذه المجموعة",
-  type: "multiple-choice",
-  answers: ["الإفتسال", "الترقيد", "الساق البصلية", "التطعيم"],
-  correctAnswer: "الساق البصلية"
-},
-{
-  question: "اختر الدخيل من هذه المجموعة",
-  type: "multiple-choice",
-  answers: ["الرّي", "الإضاءة", "الحرث", "الأدوية"],
-  correctAnswer: "الإضاءة"
-},
-{
-  question: "النمو عند النبات الأخضر هو نمو :",
-  type: "multiple-choice",
-  answers: ["يتم بواسطة البراعم القمية فقط", "يتم بواسطة الساق", "متقطع", "متواصل"],
-  correctAnswer: "متواصل"
-},
-{
-  question: "ماهي نتيجة صنع المادة العضوية بالتركيب الضوئي؟",
-  type: "text-input",
-  correctAnswer: "زيادة في الكتلة"
-},
-{
-  question: "يتوقف النمو عند النباتات الحولية في فترة من فترات حياتها",
-  type: "true-false",
-  correctAnswer: "true"
-},
-{
-  question: "البرعم القمي هو العضو المسؤول عن الزيادة في العرض",
-  type: "true-false",
-  correctAnswer: "false"
-},
+    question: "ما اسم المكون الذي يتميز باللون الأخضر المساهم في عملية التركيب الضوئي؟",
+    type: "text-input",
+    correctAnswer: "اليخضور"
+  },
+  {
+    question: "أتمم الفراغ بما يناسب : ماء + أملاح معدنية + ............. + يخضور + ضوء = أكسجين + نشأ",
+    type: "text-input",
+    correctAnswer: "ثاني اكسيد الكربون"
+  },
+  {
+    question: "ينقل الأنبوب الطلعي",
+    type: "multiple-choice",
+    answers: ["الماء", "الأمشاش الأنثوية", "حبات الطلع", "الأمشاش الذكرية"],
+    correctAnswer: "الأمشاش الذكرية"
+  },
+  {
+    question: "أتمم الفراغ بما يناسب : الانتاش هو تحول البذرة من حالة ....... الى حالة نشاط بتوفر الظروف الملائمة",
+    type: "text-input",
+    correctAnswer: "سبات"
+  },
+  {
+    question: "اختر الدخيل من هذه المجموعة",
+    type: "multiple-choice",
+    answers: ["الإفتسال", "الترقيد", "الساق البصلية", "التطعيم"],
+    correctAnswer: "الساق البصلية"
+  },
+  {
+    question: "اختر الدخيل من هذه المجموعة",
+    type: "multiple-choice",
+    answers: ["الرّي", "الإضاءة", "الحرث", "الأدوية"],
+    correctAnswer: "الإضاءة"
+  },
+  {
+    question: "النمو عند النبات الأخضر هو نمو :",
+    type: "multiple-choice",
+    answers: ["يتم بواسطة البراعم القمية فقط", "يتم بواسطة الساق", "متقطع", "متواصل"],
+    correctAnswer: "متواصل"
+  },
+  {
+    question: "ماهي نتيجة صنع المادة العضوية بالتركيب الضوئي؟",
+    type: "text-input",
+    correctAnswer: "زيادة في الكتلة"
+  },
+  {
+    question: "يتوقف النمو عند النباتات الحولية في فترة من فترات حياتها",
+    type: "true-false",
+    correctAnswer: "true"
+  },
+  {
+    question: "البرعم القمي هو العضو المسؤول عن الزيادة في العرض",
+    type: "true-false",
+    correctAnswer: "false"
+  },
 
 ];
 
@@ -95,24 +95,24 @@ function loadQuestion() {
   textInputElement.style.display = "none";
   submitButton.style.display = "none";
   resultText.textContent = "";
-  
-  if (currentQuestion.type === "true-false") {
-  const trueButton = document.createElement("button");
-  trueButton.classList.add("option");
-  trueButton.textContent = "صواب"; // Change text for true button
-  trueButton.addEventListener("click", () => {
-    checkAnswer(true); // Pass true as the answer for true button
-  });
-  optionsElement.appendChild(trueButton);
 
-  const falseButton = document.createElement("button");
-  falseButton.classList.add("option");
-  falseButton.textContent = "خطأ"; // Change text for false button
-  falseButton.addEventListener("click", () => {
-    checkAnswer(false); // Pass false as the answer for false button
-  });
-  optionsElement.appendChild(falseButton);
-}
+  if (currentQuestion.type === "true-false") {
+    const trueButton = document.createElement("button");
+    trueButton.classList.add("option");
+    trueButton.textContent = "صواب"; // Change text for true button
+    trueButton.addEventListener("click", () => {
+      checkAnswer(true); // Pass true as the answer for true button
+    });
+    optionsElement.appendChild(trueButton);
+
+    const falseButton = document.createElement("button");
+    falseButton.classList.add("option");
+    falseButton.textContent = "خطأ"; // Change text for false button
+    falseButton.addEventListener("click", () => {
+      checkAnswer(false); // Pass false as the answer for false button
+    });
+    optionsElement.appendChild(falseButton);
+  }
 
 
   if (currentQuestion.type === "multiple-choice") {
@@ -156,33 +156,46 @@ function startTimer() {
 }
 
 // Function to check answer
-// Function to check answer
 function checkAnswer(answer) {
   clearInterval(timer);
   loaderContainer.style.display = "flex";
   loadingText.textContent = "\n";
   const currentQuestion = quizData[currentQuestionIndex];
-  const correctAnswer = currentQuestion.correctAnswer; // Define correctAnswer here
+  const correctAnswer = currentQuestion.correctAnswer.toLowerCase(); // Convert correct answer to lowercase
+
   setTimeout(() => {
-    if (currentQuestion.type === "true-false") {
-      if (answer === correctAnswer) {
+    if (currentQuestion.type === 'multiple-choice') {
+      if (answer.toLowerCase() === correctAnswer) {
         score += Math.round(remainingTime * 66);
         scoreDisplay.textContent = score;
         showResult("الجواب صحيح", true);
       } else {
-        showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+        showResult(`الجواب خاطئ. الإجابة الصحيحة هي ${correctAnswer}`, false);
       }
-    } else {
-      if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+    } else if (currentQuestion.type === 'text-input') {
+      if (answer.toLowerCase() === correctAnswer) {
         score += Math.round(remainingTime * 66);
         scoreDisplay.textContent = score;
         showResult("الجواب صحيح", true);
       } else {
-        showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+        showResult(`الجواب خاطئ. الإجابة الصحيحة هي ${correctAnswer}`, false);
+      }
+    } else if (currentQuestion.type === 'true-false') {
+      if (typeof answer === 'boolean') {
+        if (answer === (correctAnswer === 'true')) {
+          score += Math.round(remainingTime * 66);
+          scoreDisplay.textContent = score;
+          showResult("الجواب صحيح", true);
+        } else {
+          showResult(`الجواب خاطئ. الإجابة الصحيحة هي ${correctAnswer}`, false);
+        }
+      } else {
+        showResult('يرجى اختيار الإجابة الصحيحة.', false);
       }
     }
   }, 3000);
 }
+
 
 
 // Function to show result
