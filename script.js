@@ -156,6 +156,7 @@ function startTimer() {
 }
 
 // Function to check answer
+// Function to check answer
 function checkAnswer(answer) {
   clearInterval(timer);
   loaderContainer.style.display = "flex";
@@ -163,15 +164,26 @@ function checkAnswer(answer) {
   const currentQuestion = quizData[currentQuestionIndex];
   const correctAnswer = currentQuestion.correctAnswer; // Define correctAnswer here
   setTimeout(() => {
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-      score += Math.round(remainingTime * 66);
-      scoreDisplay.textContent = score;
-      showResult("الجواب صحيح", true);
+    if (currentQuestion.type === "true-false") {
+      if (answer === correctAnswer) {
+        score += Math.round(remainingTime * 66);
+        scoreDisplay.textContent = score;
+        showResult("الجواب صحيح", true);
+      } else {
+        showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+      }
     } else {
-      showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+      if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+        score += Math.round(remainingTime * 66);
+        scoreDisplay.textContent = score;
+        showResult("الجواب صحيح", true);
+      } else {
+        showResult(`الجواب خاطئ. الإجابة الصحيحة هي: ${correctAnswer}`, false);
+      }
     }
   }, 3000);
 }
+
 
 // Function to show result
 function showResult(message, isCorrect) {
