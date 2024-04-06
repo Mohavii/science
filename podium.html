@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podium Page</title>
+    <style>
+      body {
+        font-family:
+          Expo Arabic,
+          sans-serif;
+        background-image: url("Science-Background.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        overflow-y: hidden; /* Prevent horizontal scrolling */
+
+        padding: 0;
+        color: #333;
+        height: 100vh; /* Set the body height to fill the viewport */
+        display: flex;
+        align-items: flex-end; /* Align items to the bottom */
+        justify-content: center; /* Align items horizontally */
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .bronze-medal {
+        background-image: url("bronze-medal.png");
+        width: 700px;
+        height: 700px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition:
+          transform 0.5s,
+          opacity 0.5s;
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        left: 85%;
+        transform: translateX(-50%) translateY(200%);
+      }
+      .gold-medal {
+        background-image: url("gold-medal.png");
+        width: 700px;
+        height: 700px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition:
+          transform 0.5s,
+          opacity 0.5s;
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(200%);
+      }
+      .silver-medal {
+        background-image: url("silver-medal.png");
+        width: 700px;
+        height: 700px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition:
+          transform 0.5s,
+          opacity 0.5s;
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        left: 15%;
+        transform: translateX(-50%) translateY(200%);
+      }
+      .silver-player {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+        position: absolute;
+        top: calc(
+          40% - 120px
+        ); /* Adjusted to be above the bronze medal by 20px */
+        left: 15%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+      }
+      .gold-player {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+        position: absolute;
+        top: calc(
+          25% - 120px
+        ); /* Adjusted to be above the bronze medal by 20px */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+      }
+      .bronze-player {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+        position: absolute;
+        top: calc(
+          50% - 120px
+        ); /* Adjusted to be above the bronze medal by 20px */
+        left: 85%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+      }
+      .player-animation {
+        opacity: 1;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes flyIn {
+        from {
+          transform: translateX(-50%) translateY(200%);
+        }
+        to {
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Podium</h1>
+    <div class="medal bronze-medal" id="bronzeMedal"></div>
+    <div class="player bronze-player" id="bronzePlayer"></div>
+    <div class="medal silver-medal" id="silverMedal"></div>
+    <div class="player silver-player" id="silverPlayer"></div>
+    <div class="medal gold-medal" id="goldMedal"></div>
+    <div class="player gold-player" id="goldPlayer"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fetch JSON data from server
+        fetch("https://pacific-aboard-stock.glitch.me/get-scores")
+          .then((response) => response.json())
+          .then((jsonData) => {
+            // Process the fetched JSON data
+            displayScores(jsonData);
+          })
+          .catch((error) => console.error("Error fetching scores:", error));
+      });
+
+      function displayScores(scores) {
+        // Assuming scores is an array of objects with 'nickname' and 'score' properties
+        // Sort the scores by descending order of scores
+        scores.sort((a, b) => b.score - a.score);
+
+        // Select the top 3 scores
+        const topThree = scores.slice(0, 3);
+
+        // Assuming you have elements with IDs 'goldPlayer', 'silverPlayer', and 'bronzePlayer'
+        const bronzePlayer = document.getElementById("bronzePlayer");
+        const silverPlayer = document.getElementById("silverPlayer");
+        const goldPlayer = document.getElementById("goldPlayer");
+
+        // Update the player names with the top 3 scores
+        if (topThree.length >= 3) {
+          bronzePlayer.textContent = topThree[2].nickname;
+          silverPlayer.textContent = topThree[1].nickname;
+          goldPlayer.textContent = topThree[0].nickname;
+        }
+
+        // Add fly-in animation to bronze medal
+        const bronzeMedal = document.getElementById("bronzeMedal");
+        bronzeMedal.style.opacity = 1;
+        bronzeMedal.style.animation = "flyIn 1s ease forwards";
+
+        // Add animation class to player name
+        setTimeout(() => {
+          bronzePlayer.style.opacity = 1;
+          bronzePlayer.style.animation = "fadeIn 0.5s ease forwards";
+
+          // Add fly-in animation to silver medal
+          const silverMedal = document.getElementById("silverMedal");
+          silverMedal.style.opacity = 1;
+          silverMedal.style.animation = "flyIn 1s ease forwards";
+
+          // Add animation class to silver player
+          setTimeout(() => {
+            silverPlayer.style.opacity = 1;
+            silverPlayer.style.animation = "fadeIn 0.5s ease forwards";
+
+            // Add fly-in animation to gold medal
+            const goldMedal = document.getElementById("goldMedal");
+            goldMedal.style.opacity = 1;
+            goldMedal.style.animation = "flyIn 1s ease forwards";
+
+            // Add animation class to gold player
+            setTimeout(() => {
+              goldPlayer.style.opacity = 1;
+              goldPlayer.style.animation = "fadeIn 0.5s ease forwards";
+            }, 2000); // Wait for 1 second after gold medal fly in
+          }, 1000); // Wait for 1 second after silver player fade in
+        }, 1000); // Wait for 1 second after bronze medal fly in
+      }
+    </script>
+  </body>
+</html>
